@@ -5,8 +5,6 @@
 *   File:   Menubutton.js
 *
 *   Desc:   Menubutton widget that implements ARIA Authoring Practices
-*
-*   Author: Jon Gunderson, Ku Ja Eun, Nicholas Hoyt and Brian Loh
 */
 
 /*
@@ -84,9 +82,7 @@ Menubutton.prototype.init = function () {
 };
 
 Menubutton.prototype.handleKeydown = function (event) {
-  var tgt = event.currentTarget,
-    flag = false,
-    clickEvent;
+  var flag = false;
 
   switch (event.keyCode) {
     case this.keyCode.SPACE:

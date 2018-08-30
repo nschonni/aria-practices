@@ -16,13 +16,16 @@
 
 </head>
 <body>
+  <nav aria-label="Related Links" class="feedback">
+    <ul>
+      <li><a href="../../#browser_and_AT_support">Browser and Assistive Technology Support</a></li>
+      <li><a href="https://github.com/w3c/aria-practices/issues/new">Report Issue</a></li>
+      <li><a href="https://github.com/w3c/aria-practices/projects/8">Related Issues</a></li>
+      <li><a href="../../#accordion">Design Pattern</a></li>
+    </ul>
+  </nav>
   <main>
   <h1>Accordion Example</h1>
-  <p>
-    <strong>NOTE:</strong> This example has recently been updated to include support for optional keyboard interactions.
-    Please provide feedback in
-    <a href="https://github.com/w3c/aria-practices/issues/401">issue 401.</a>
-  </p>
   <p>
     The below example section contains a simple personal information input form divided into 3 sections
     that demonstrates the
@@ -41,17 +44,19 @@
             Allow for each toggle to both open and close individually
 
           data-allow-multiple
-            Allow for multiple accordion sections to be expanded at the same time
+            Allow for multiple accordion sections to be expanded at the same time. Assumes data-allow-toggle otherwise you would not be able to close any of the accordions
           __________
 
           Ex:
-            <dl id="accordionGroup" role="presentation" class="Accordion" data-allow-multiple data-allow-toggle>
+            <dl id="accordionGroup" role="presentation" class="Accordion" data-allow-multiple>
+
+            <dl id="accordionGroup" role="presentation" class="Accordion" data-allow-toggle>
 
         -->
         <dl id="accordionGroup" role="presentation" class="Accordion">
           <dt role="heading" aria-level="3">
             <button aria-expanded="true" class="Accordion-trigger"
-              aria-controls="sect1" id="accordion1id"
+              aria-controls="sect1" id="accordion1id" type="button"
             >
               <span class="Accordion-title">Personal Information</span><span class="Accordion-icon"></span>
             </button>
@@ -93,14 +98,14 @@
           </dd>
           <dt role="heading" aria-level="3">
             <button aria-expanded="false" class="Accordion-trigger"
-              aria-controls="sect2" id="accordion2id"
+              aria-controls="sect2" id="accordion2id" type="button"
             >
               <span class="Accordion-title">Billing Address</span><span class="Accordion-icon"></span>
             </button>
           </dt>
           <dd id="sect2" role="region" aria-labelledby="accordion2id" class="Accordion-panel" hidden>
             <div>
-              <fieldset class="billing flex">
+              <fieldset>
                 <p>
                   <label for="b-add1">Address 1:</label>
                   <input type="text" name="b-add1" id="b-add1" />
@@ -126,7 +131,7 @@
           </dd>
           <dt role="heading" aria-level="3">
             <button aria-expanded="false" class="Accordion-trigger"
-              aria-controls="sect3" id="accordion3id"
+              aria-controls="sect3" id="accordion3id" type="button"
             >
               <span class="Accordion-title">Shipping Address</span><span class="Accordion-icon"></span>
             </button>
@@ -172,11 +177,29 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr data-test-id="key-enter-or-space">
           <th><kbd>Space</kbd> or <kbd>Enter</kbd></th>
           <td>When focus is on the accordion header of a collapsed section, expands the section.</td>
         </tr>
-        <tr>
+        <tr data-test-id="key-tab">
+          <th><kbd>Tab</kbd></th>
+          <td>
+            <ul>
+              <li>Moves focus to the next focusable element.</li>
+              <li>All focusable elements in the accordion are included in the page <kbd>Tab</kbd> sequence.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr data-test-id="key-shift-tab">
+          <th><kbd>Shift + Tab</kbd></th>
+          <td>
+            <ul>
+              <li>Moves focus to the previous focusable element.</li>
+              <li>All focusable elements in the accordion are included in the page <kbd>Tab</kbd> sequence.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr data-test-id="key-down-arrow">
           <th><kbd>Down Arrow</kbd></th>
           <td>
             <ul>
@@ -185,7 +208,7 @@
             </ul>
           </td>
         </tr>
-        <tr>
+        <tr data-test-id="key-up-arrow">
           <th><kbd>Up Arrow</kbd></th>
           <td>
             <ul>
@@ -194,32 +217,13 @@
             </ul>
           </td>
         </tr>
-        <tr>
+        <tr data-test-id="key-home">
           <th><kbd>Home</kbd></th>
           <td>When focus is on an accordion header, moves focus to the first accordion header.</td>
         </tr>
-        <tr>
+        <tr data-test-id="key-end">
           <th><kbd>End</kbd></th>
           <td>When focus is on an accordion header, moves focus to the last accordion header.</td>
-        </tr>
-        <tr>
-          <th><kbd>Control + Page Down</kbd></th>
-          <td>
-            <ul>
-              <li>When focus is inside an accordion panel or on an accordion header, moves focus to the next accordion header.</li>
-              <li>When focus is on last accordion header or inside last accordion panel, moves focus to first accordion header.</li>
-            </ul>
-          </td>
-        </tr>
-        <tr>
-          <th><kbd>Control + Page Up</kbd></th>
-          <td>
-            <ul>
-              <li>When focus is inside an accordion panel, moves focus to the header for that panel.</li>
-              <li>When focus is on an accordion header, moves focus to the previous accordion header.</li>
-              <li>When focus is on first accordion header, moves focus to last accordion header.</li>
-            </ul>
-          </td>
         </tr>
       </tbody>
     </table>
@@ -240,7 +244,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr data-test-id="presentation-role">
           <th scope="row"><code>presentation</code></th>
           <td></td>
           <td><code>dl</code></td>
@@ -251,13 +255,13 @@
             </ul>
           </td>
         </tr>
-        <tr>
+        <tr data-test-id="heading-role">
           <th scope="row"><code>heading</code></th>
           <td></td>
           <td><code>dt</code></td>
           <td>Identifies the element as a heading that serves as an accordion header.</td>
         </tr>
-        <tr>
+        <tr data-test-id="heading-aria-level">
           <td></td>
           <th scope="row"><code>aria-level=<q>3</q></code></th>
           <td><code>dt</code></td>
@@ -268,45 +272,37 @@
             </ul>
           </td>
         </tr>
-        <tr>
-          <th scope="row"><code>button</code></th>
-          <td></td>
-          <td><code>a</code></td>
-          <td>
-            Identifies the element as a button inside the accordion header that provides hide/show functionality.
-          </td>
-        </tr>
-        <tr>
+        <tr data-test-id="button-aria-expanded">
           <td> </td>
           <th scope="row"><code>aria-expanded=<q>true</q></code></th>
-          <td><code>a</code></td>
+          <td><code>button</code></td>
           <td>
             Set to <code>true</code> when the Accordion panel is expanded, otherwise set to <code>false</code>.
           </td>
         </tr>
-        <tr>
+        <tr data-test-id="button-aria-controls">
           <td> </td>
           <th scope="row"><code>aria-controls=<q>ID</q></code></th>
-          <td><code>a</code></td>
+          <td><code>button</code></td>
           <td>
             Points to the ID of the panel which the header controls.
           </td>
         </tr>
-        <tr>
+        <tr data-test-id="button-aria-disabled">
           <td> </td>
           <th scope="row"><code>aria-disabled=<q>true</q></code></th>
-          <td><code>a</code></td>
+          <td><code>button</code></td>
           <td>
             If the accordion panel is expanded and is not allowed to be collapsed, then set to <code>true</code>.
           </td>
         </tr>
-        <tr>
+        <tr data-test-id="region-role">
           <th scope="row">region</th>
           <td></td>
           <td><code>dd</code></td>
           <td>Creates a landmark region that contains the currently expanded accordion panel.</td>
         </tr>
-        <tr>
+        <tr data-test-id="region-aria-labelledby">
           <td></td>
           <th scope="row"><code>aria-labelledby=&quot;ID_REF&quot;</code></th>
           <td><code>dd</code></td>
@@ -358,7 +354,6 @@
   <nav>
     <a href="../../#accordion">Accordion Design Pattern in WAI-ARIA Authoring Practices 1.1</a>
   </nav>
-
   <script src="js/accordion.js"></script>
 </body>
 </html>

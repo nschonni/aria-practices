@@ -5,8 +5,6 @@
 *   File:   PopupMenuLinks.js
 *
 *   Desc:   Popup menu Links widget that implements ARIA Authoring Practices
-*
-*   Author: Jon Gunderson, Ku Ja Eun, Nicholas Hoyt and Brian Loh
 */
 
 /*
@@ -50,7 +48,7 @@ var PopupMenuLinks = function (domNode, controllerObj) {
   var childElement = domNode.firstElementChild;
   while (childElement) {
     var menuitem = childElement.firstElementChild;
-    if (menuitem && menuitem === 'A') {
+    if (menuitem && menuitem.tagName !== 'A') {
       throw new Error(msgPrefix + 'has descendant elements that are not A elements.');
     }
     childElement = childElement.nextElementSibling;

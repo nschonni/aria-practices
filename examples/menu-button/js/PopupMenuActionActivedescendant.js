@@ -5,8 +5,6 @@
 *   File:   PopupMenuActionActivedescendant.js
 *
 *   Desc:   Popup menu widget that implements ARIA Authoring Practices
-*
-*   Author: Jon Gunderson, Ku Ja Eun, Nicholas Hoyt and Brian Loh
 */
 
 /*
@@ -137,8 +135,7 @@ PopupMenuActionActivedescendant.prototype.init = function () {
 
 };
 PopupMenuActionActivedescendant.prototype.handleKeydown = function (event) {
-  var tgt = event.currentTarget,
-    flag = false,
+  var flag = false,
     char = event.key,
     clickEvent;
 
@@ -157,7 +154,11 @@ PopupMenuActionActivedescendant.prototype.handleKeydown = function (event) {
   }
   else {
     switch (event.keyCode) {
+
       case this.keyCode.SPACE:
+        flag = true;
+        break;
+
       case this.keyCode.RETURN:
         // Create simulated mouse event to mimic the behavior of ATs
         // and let the event handler handleClick do the housekeeping.

@@ -5,8 +5,6 @@
 *   File:   TextStyling.js
 *
 *   Desc:   Styling functions for changing the style of an item
-*
-*   Author: Jon Gunderson and Ku Ja Eun
 */
 
 var StyleManager = function (id) {
@@ -51,7 +49,7 @@ StyleManager.prototype.setItalic = function (flag) {
     this.node.style.fontStyle = 'italic';
   }
   else {
-    this.node.style.fontStyle = 'none';
+    this.node.style.fontStyle = 'normal';
   }
 };
 

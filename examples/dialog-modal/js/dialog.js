@@ -1,3 +1,8 @@
+/*
+*   This content is licensed according to the W3C Software License at
+*   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
+*/
+
 var aria = aria || {};
 
 aria.Utils = aria.Utils || {};
@@ -8,6 +13,8 @@ aria.Utils = aria.Utils || {};
    * can ignore the events.
    */
   aria.Utils.IgnoreUtilFocusChanges = false;
+
+  aria.Utils.dialogOpenClass = 'has-dialog';
 
   /**
    * @desc Set focus on descendant nodes until the first focusable element is
@@ -119,12 +126,30 @@ aria.Utils = aria.Utils || {};
    */
   aria.Dialog = function (dialogId, focusAfterClosed, focusFirst) {
     this.dialogNode = document.getElementById(dialogId);
+    var role = this.dialogNode.getAttribute('role');
 
-    if (this.dialogNode === null ||
-        this.dialogNode.getAttribute('role') !== 'dialog') {
+    if (this.dialogNode === null || !['dialog', 'alertdialog'].includes(role)) {
       throw new Error(
-        'Dialog() requires a DOM element with ARIA role of dialog.');
+        'Dialog() requires a DOM element with ARIA role of dialog or alertdialog.');
     }
+
+    // Wrap in an individual backdrop element if one doesn't exist
+    // Native <dialog> elements use the ::backdrop pseudo-element, which
+    // works similarly.
+    var backdropClass = 'dialog-backdrop';
+    if (this.dialogNode.parentNode.classList.contains(backdropClass)) {
+      this.backdropNode = this.dialogNode.parentNode;
+    }
+    else {
+      this.backdropNode = document.createElement('div');
+      this.backdropNode.className = backdropClass;
+      this.dialogNode.parentNode.insertBefore(this.backdropNode, this.dialogNode);
+      this.backdropNode.appendChild(this.dialogNode);
+    }
+    this.backdropNode.classList.add('active');
+
+    // Disable scroll on the body element
+    document.body.classList.add(aria.Utils.dialogOpenClass);
 
     if (typeof focusAfterClosed === 'string') {
       this.focusAfterClosed = document.getElementById(focusAfterClosed);
@@ -170,9 +195,6 @@ aria.Utils = aria.Utils || {};
     this.clearDialog();
     this.dialogNode.className = 'default_dialog'; // make visible
 
-    var layer = document.getElementById('dialog_layer');
-    layer.className = 'showing';
-
     if (this.focusFirst) {
       this.focusFirst.focus();
     }
@@ -205,6 +227,7 @@ aria.Utils = aria.Utils || {};
     aria.Utils.remove(this.preNode);
     aria.Utils.remove(this.postNode);
     this.dialogNode.className = 'hidden';
+    this.backdropNode.classList.remove('active');
     this.focusAfterClosed.focus();
 
     // If a dialog was open underneath this one, restore its listeners.
@@ -212,8 +235,7 @@ aria.Utils = aria.Utils || {};
       aria.getCurrentDialog().addListeners();
     }
     else {
-      var layer = document.getElementById('dialog_layer');
-      layer.className = 'hidden';
+      document.body.classList.remove(aria.Utils.dialogOpenClass);
     }
   }; // end close
 
@@ -238,6 +260,8 @@ aria.Utils = aria.Utils || {};
     aria.Utils.remove(this.preNode);
     aria.Utils.remove(this.postNode);
     this.dialogNode.className = 'hidden';
+    this.backdropNode.classList.remove('active');
+
     var focusAfterClosed = newFocusAfterClosed || this.focusAfterClosed;
     var dialog = new aria.Dialog(newDialogId, focusAfterClosed, newFocusFirst);
   }; // end replace
