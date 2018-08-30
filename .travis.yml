@@ -18,6 +18,7 @@ jobs:
       name: HTML Linting
       script: npm run vnu-jar
     - stage: Deploy
+      if: branch = master
       script: skip
       before_deploy: scripts/travis-before_deploy.sh
       deploy:
