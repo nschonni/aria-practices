@@ -31,8 +31,7 @@ jobs:
       env: ALLOW_FAILURE=true
     - stage: Lint
       name: Regression Tests Coverage Report
-      script: node test/util/report.js
-      env: ALLOW_FAILURE=true
+      script: false
 
     - stage: Test
       name: AVA Regression Tests
