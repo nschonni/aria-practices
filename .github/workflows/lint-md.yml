@@ -1,0 +1,36 @@
+name: Markdown Linting
+on:
+  push:
+    branches-ignore:
+      - "dependabot/**"
+    paths:
+      - "package*.json"
+      - ".prettier*"
+      - "**/*.md"
+      - ".github/workflows/lint-css.yml"
+      - "!common/**"
+
+  pull_request:
+    paths:
+      - "package*.json"
+      - ".prettier*"
+      - "**/*.md"
+      - ".github/workflows/lint-css.yml"
+      - "!common/**"
+
+jobs:
+  lint-md:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Prettier
+        run: npm run lint:md
