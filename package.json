@@ -7,12 +7,12 @@
     "example": "examples"
   },
   "scripts": {
-    "fix": "npm run lint:es -- --fix && npm run lint:css -- --fix",
+    "fix": "npm run lint:es -- --fix && npm run lint:css -- --fix && prettier --write **/*.html",
     "lint": "npm run lint:es && npm run lint:css && npm run vnu-jar && npm run lint:spelling",
     "lint:css": "stylelint **/*.css",
     "lint:es": "eslint .",
     "lint:js": "npm run lint:es",
-    "lint:html": "npm run vnu-jar",
+    "lint:html": "npm run vnu-jar && prettier --check **/*.html",
     "lint:spelling": "cspell \"examples/**/*.html\" \"aria-practices.html\"",
     "regression": "ava --timeout=1m",
     "regression-report": "node test/util/report",
@@ -62,6 +62,10 @@
     ],
     "*.js": [
       "eslint --fix",
+      "git add"
+    ],
+    "*.html": [
+      "prettier --write",
       "git add"
     ]
   },
