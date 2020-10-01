@@ -4,18 +4,18 @@
 
 This repository maintains the WAI-ARIA Authoring Practices Guide.
 
-* [Latest editor's draft built from master branch](http://w3c.github.io/aria-practices/)
-* [Most recent version published on w3.org](https://www.w3.org/TR/wai-aria-practices-1.1/)
-* Developed by the [Authoring Practices Task Force](https://www.w3.org/WAI/ARIA/task-forces/practices/) of the [ARIA Working Group](http://www.w3.org/WAI/ARIA/).
-* Staff contact: [Michael Cooper](http://www.w3.org/People/cooper/).
+- [Latest editor's draft built from master branch](http://w3c.github.io/aria-practices/)
+- [Most recent version published on w3.org](https://www.w3.org/TR/wai-aria-practices-1.1/)
+- Developed by the [Authoring Practices Task Force](https://www.w3.org/WAI/ARIA/task-forces/practices/) of the [ARIA Working Group](http://www.w3.org/WAI/ARIA/).
+- Staff contact: [Michael Cooper](http://www.w3.org/People/cooper/).
 
 Please do not provide commit access to this repository without coordination.
 
 ## How the work is organized
 
-* Work is planned and prioritized in our [milestones](https://github.com/w3c/aria-practices/milestones?direction=asc&sort=due_date&state=open). Each milestone corresponds to a working draft or release published to w3.org.
-* Work is organized by topic in our [projects](https://github.com/w3c/aria-practices/projects). Each project corresponds to a type of design pattern or section of guidance.
-* The [scope of work and roadmap](https://github.com/w3c/aria-practices/wiki/Scope) are described in the project wiki.
+- Work is planned and prioritized in our [milestones](https://github.com/w3c/aria-practices/milestones?direction=asc&sort=due_date&state=open). Each milestone corresponds to a working draft or release published to w3.org.
+- Work is organized by topic in our [projects](https://github.com/w3c/aria-practices/projects). Each project corresponds to a type of design pattern or section of guidance.
+- The [scope of work and roadmap](https://github.com/w3c/aria-practices/wiki/Scope) are described in the project wiki.
 
 ## Contributing
 
