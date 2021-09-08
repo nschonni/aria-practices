@@ -54,7 +54,7 @@
     "npm-merge-driver": "^2.3.6",
     "pinst": "^2.1.4",
     "prettier": "^2.2.1",
-    "selenium-webdriver": "^4.0.0-beta.1",
+    "selenium-webdriver": "^4.0.0-rc-1",
     "stylelint": "^13.11.0",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard": "^20.0.0",
